@@ -216,7 +216,7 @@ class PokerHand {
   #numbers = []; get numbers () {return this.#numbers.concat([]);}
   set numbers (numbers) {
     if (Array.isArray(numbers)) {
-      numbers = numbers.flat().map(elem => Number(elem)).filter(elem => (Number.isInteger(elem) && 1 <= elem && elem <= 13));
+      numbers = numbers.flat().map(elem => Number(elem)).filter(elem => (Number.isInteger(elem) && 0 <= elem && elem <= 14));
       this.#numbers = numbers;
       this.#evaluate();
     }
@@ -234,7 +234,6 @@ class PokerHand {
     if (numbers.length === 5) {
       let target_map = new Map();
       numbers.forEach(function (value) {
-        if (value === 1) value = 14;
         if (target_map.has(value)) {
           target_map.set(value, target_map.get(value) + 1);
         }else{
@@ -278,7 +277,7 @@ class PokerHand {
         this.#evaluation += target_entries[2][0] * (10**4);
       }else if (target_map.size === 4) {
         // one pair
-        this.#evaluation = 3 * (10**10);
+        this.#evaluation = 1 * (10**10);
         this.#evaluation += target_entries[0][0] * (10**8);
         this.#evaluation += target_entries[1][0] * (10**6);
         this.#evaluation += target_entries[2][0] * (10**4);
@@ -385,4 +384,40 @@ class PokerHand {
         }
     }
   }
+}
+
+
+function info (num) {
+  /**@type {[[Number, PokerHand]]} */
+  let hands = [];
+  let message = "";
+  for (i = 1000; i <= 9999; i++) {
+    hands.push([i, new PokerHand(get_numbers(i))]);
+  }
+  hands.sort(function (a,b) {
+    if (a[1].evaluation > b[1].evaluation) return -1;
+    if (a[1].evaluation < b[1].evaluation) return 1;
+    if (a[1].evaluation === b[1].evaluation) return 0;
+  });
+  if (num === undefined) {
+    for (let i = 9; i > 0; i--) {
+      let filterd = hands.filter((value) => (value[1].evaluation >= i * (10**10) && value[1].evaluation < (i+1) * (10**10)));
+      if (filterd.length > 0) {
+        message += filterd[0][1].asString() + "\t:" + filterd.length + "\n";
+      }
+    }
+  }else{
+    let my_hand = new PokerHand(get_numbers(num));
+    message += "Information of " + String(num) + "\n";
+    message += "factor\t:  " + factorization(num) + "\n";
+    message += "hand\t:  " + my_hand.asString("en") + "\n";
+    message += "score\t:  " + my_hand.evaluation + "\n";
+    let filterd = hands.filter((value) => (value[1].evaluation > my_hand.evaluation));
+    message += "WIN\t:  " + filterd.length + "\n";
+    filterd = hands.filter((value) => (value[1].evaluation === my_hand.evaluation));
+    message += "DRAW\t:  " + filterd.length + "\n";
+    filterd = hands.filter((value) => (value[1].evaluation < my_hand.evaluation && value[1].evaluation !== 0));
+    message += "LOSE\t:  " + filterd.length;
+  }
+  console.log(message);
 }
