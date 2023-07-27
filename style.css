@@ -183,17 +183,20 @@ span.area_caption {
 }
 
 div.tab_wrapper.display1 div.tab_tab.tab1,
-div.tab_wrapper.display2 div.tab_tab.tab2{
+div.tab_wrapper.display2 div.tab_tab.tab2,
+div.tab_wrapper.display3 div.tab_tab.tab3{
   background-color: #fff;
 }
 
 div.tab_wrapper.display1 .area_body.content1,
-div.tab_wrapper.display2 .area_body.content2{
+div.tab_wrapper.display2 .area_body.content2,
+div.tab_wrapper.display3 .area_body.content3{
   display: initial;
 }
 
 div.tab_wrapper.display1 .question_number.content1,
-div.tab_wrapper.display2 .question_number.content2{
+div.tab_wrapper.display2 .question_number.content2,
+div.tab_wrapper.display3 .question_number.content3{
   display: initial;
 }
 
