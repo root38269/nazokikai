@@ -39,6 +39,10 @@ for (let i = 0; i < digits; i++) {
   output_elems.push(document.getElementById("div_output_" + (i+1)));
 }
 
+locked = [false, true, true, true];
+document.getElementById("div_tab2").style.display = "none";
+document.getElementById("div_tab3").style.display = "none";
+
 
 
 
@@ -111,6 +115,17 @@ function input_str (str) {
     div_message_area.innerText = result;
     write_log(my_num + ":" + result);
     next_reset = true;
+    if (result === "WIN") {
+      if (locked[current_tab_number]) {
+        if (current_tab_number === 3) {
+          write_log("LEVEL CLEAR!");
+        }else{
+          document.getElementById("div_tab" + (current_tab_number + 1)).style.display = null;
+          write_log("LEVEL." + (current_tab_number + 1) + "が解放されました. ");
+        }
+        locked[current_tab_number] = false;
+      }
+    }
   }
 }
 
@@ -192,7 +207,6 @@ function get_numbers (number) {
   return factorization(number).join("").split("").map(elem => Number(elem)).sort();
 }
 
-// todo: 0 の扱い
 
 
 /*
