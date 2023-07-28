@@ -78,6 +78,9 @@ let next_reset = false;
  * @param {"0"|"1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"|"C"|"E"} str 
  */
 function input_str (str) {
+  try {
+
+  
   if (str === "" || str === null) return;
   if (!Number.isNaN(Number(str))) {
     if (next_reset) {
@@ -126,6 +129,11 @@ function input_str (str) {
         locked[current_tab_number] = false;
       }
     }
+  }
+
+  } catch (e) {
+    write_log(e.name + ': ' + e.message);
+    throw e;
   }
 }
 
