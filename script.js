@@ -159,7 +159,7 @@ function current_log_body () {
 }
 
 function current_question_number () {
-  return Number(div_question_area.innerText);
+  return Number(safe_number_text(div_question_area.innerText));
 }
 
 
@@ -422,13 +422,13 @@ function info (num) {
     if (a[1].evaluation === b[1].evaluation) return 0;
   });
   if (num === undefined) {
-    for (let i = 9; i > 0; i--) {
+    for (let i = 9; i >= 0; i--) {
       let filterd = hands.filter((value) => (value[1].evaluation >= i * (10**10) && value[1].evaluation < (i+1) * (10**10)));
       if (filterd.length > 0) {
         message += filterd[0][1].asString() + "\t:" + filterd.length + "\n";
       }
     }
-  }else{
+  }else if (typeof num === "number") {
     let my_hand = new PokerHand(get_numbers(num));
     message += "Information of " + String(num) + "\n";
     message += "factor\t:  " + factorization(num) + "\n";
@@ -440,6 +440,13 @@ function info (num) {
     message += "DRAW\t:  " + filterd.length + "\n";
     filterd = hands.filter((value) => (value[1].evaluation < my_hand.evaluation && value[1].evaluation !== 0));
     message += "LOSE\t:  " + filterd.length;
+  }else if (typeof num === "string") {
+    let filterd = hands.filter((value) => (value[1].asString("en") === num));
+    return filterd;
   }
   console.log(message);
+}
+
+function safe_number_text (text) {
+  return text.replace(/[^0-9]/g, "");
 }
