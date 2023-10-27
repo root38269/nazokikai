@@ -95,11 +95,11 @@ const input_str = function (str) {
     }else if (output_elems[0].innerText !== "") {
       return;
     }else{
-      if (output_elems[digits - 2].innerText === "" && output_elems[digits - 1].innerText === "0") {
+      if (output_elems[digits - 2].innerText === "" && safe_number_text(output_elems[digits - 1].innerText) === "0") {
         output_elems[digits - 1].innerText = str;
       }else{
         for (let i = 0; i < digits - 1; i++) {
-          output_elems[i].innerText = output_elems[i + 1].innerText;
+          output_elems[i].innerText = safe_number_text(output_elems[i + 1].innerText);
         }
         output_elems[digits - 1].innerText = str;
       }
@@ -458,7 +458,20 @@ const info = function (num) {
 }
 
 function safe_number_text (text) {
-  return text.replace(/[^0-9]/g, "");
+  let x = text;
+  text = text.replace(/０/g, "0");
+  text = text.replace(/１/g, "1");
+  text = text.replace(/２/g, "2");
+  text = text.replace(/３/g, "3");
+  text = text.replace(/４/g, "4");
+  text = text.replace(/５/g, "5");
+  text = text.replace(/６/g, "6");
+  text = text.replace(/７/g, "7");
+  text = text.replace(/８/g, "8");
+  text = text.replace(/９/g, "9");
+  text = text.replace(/[^0-9]/g, "");
+  if (x === "") x = "0";
+  return x;
 }
 
 
