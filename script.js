@@ -1,3 +1,6 @@
+
+"use strict;"
+
 const div_tab_wrapper = document.getElementById("div_tab_wrapper");
 const div_question_area = document.getElementById("div_question_area");
 const div_message_area = document.getElementById("div_message_area");
@@ -50,7 +53,7 @@ document.getElementById("div_tab3").style.display = "none";
 let current_tab_number = 1;
 
 
-function switch_tab (new_tab_number) {
+const switch_tab = function (new_tab_number) {
   div_tab_wrapper.classList.remove("display" + current_tab_number);
   div_tab_wrapper.classList.add("display" + new_tab_number);
   current_tab_number = new_tab_number;
@@ -62,7 +65,7 @@ function switch_tab (new_tab_number) {
  * @param {Number} num
  * @returns {"ERROR"|"LOSE"|"WIN"|"DRAW"} 
  */
-function enter_number (num) {
+const enter_number = function (num) {
   let my_hand = new PokerHand(get_numbers(num));
   let question_hand = new PokerHand(get_numbers(current_question_number()));
   if (my_hand.evaluation === 0) return "ERROR";
@@ -77,7 +80,7 @@ let next_reset = false;
  * 文字を入力する
  * @param {"0"|"1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"|"C"|"E"} str 
  */
-function input_str (str) {
+const input_str = function (str) {
   try {
 
   
@@ -144,7 +147,7 @@ function input_str (str) {
  * @param {String} str 
  * @param {Boolean} newline 
  */
-function write_log (str, newline = true) {
+const write_log = function (str, newline = true) {
   let my_log_body = current_log_body();
   if (newline) str = str + "\n";
   my_log_body.value = str + my_log_body.value;
@@ -154,24 +157,23 @@ function write_log (str, newline = true) {
  * 現在のタブの log_body
  * @returns {HTMLTextAreaElement} 
  */
-function current_log_body () {
+const current_log_body = function () {
   return document.getElementById("textarea_log_body" + current_tab_number);
 }
 
-function current_question_number () {
+const current_question_number = function () {
   return question_numbers[current_tab_number - 1];
 }
 
 const question_numbers = [2639, 3835, 7203];
 
-function init () {
+const init =function () {
   document.getElementById("question_number1").innerText = question_numbers[0];
   document.getElementById("question_number2").innerText = question_numbers[1];
   document.getElementById("question_number3").innerText = question_numbers[2];
   
 }
 
-init();
 
 //=================================================================
 
@@ -181,7 +183,7 @@ init();
  * @param {Number} number 素因数分解する数 1 以上の整数
  * @returns {[Number]}    素因数の配列を返す 素因数は大きい順 
  */
-function factorizationB (number) {
+const factorizationB =function (number) {
   let target = number / 2;
   if (number === 1) return [];
   if (Number.isInteger(target)) {
@@ -207,7 +209,7 @@ function factorizationB (number) {
  * @param {Number} number 素因数分解する数
  * @returns {[Number]}    素因数の配列を返す 素因数は小さい順 
  */
-function factorization (number) {
+const factorization = function (number) {
   if (Number.isInteger(number)) {
     if (number < 0) number = -number;
     if (number > 0) {
@@ -219,7 +221,7 @@ function factorization (number) {
 }
 
 
-function get_numbers (number) {
+const get_numbers = function (number) {
   return factorization(number).join("").split("").map(elem => Number(elem)).sort();
 }
 
@@ -417,7 +419,7 @@ class PokerHand {
 }
 
 
-function info (num) {
+const info = function (num) {
   /**@type {[[Number, PokerHand]]} */
   let hands = [];
   let message = "";
@@ -458,3 +460,7 @@ function info (num) {
 function safe_number_text (text) {
   return text.replace(/[^0-9]/g, "");
 }
+
+
+
+init();
