@@ -159,11 +159,19 @@ function current_log_body () {
 }
 
 function current_question_number () {
-  return Number(safe_number_text(div_question_area.innerText));
+  return question_numbers[current_tab_number - 1];
 }
 
+const question_numbers = [2639, 3835, 7203];
 
+function init () {
+  document.getElementById("question_number1").innerText = question_numbers[0];
+  document.getElementById("question_number2").innerText = question_numbers[1];
+  document.getElementById("question_number3").innerText = question_numbers[2];
+  
+}
 
+init();
 
 //=================================================================
 
