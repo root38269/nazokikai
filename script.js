@@ -115,7 +115,7 @@ const input_str = function (str) {
     if (output_elems[0].innerText === "") return;
     let my_num = "";
     for (let i = 0; i < digits; i++) {
-      my_num = my_num + output_elems[i].innerText;
+      my_num = my_num + safe_number_text(output_elems[i].innerText);
     }
     let result = enter_number(Number(my_num));
     div_message_area.innerText = result;
