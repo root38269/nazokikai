@@ -459,17 +459,17 @@ const info = function (num) {
 
 function safe_number_text (text) {
   let x = text;
-  text = text.replace(/０/g, "0");
-  text = text.replace(/１/g, "1");
-  text = text.replace(/２/g, "2");
-  text = text.replace(/３/g, "3");
-  text = text.replace(/４/g, "4");
-  text = text.replace(/５/g, "5");
-  text = text.replace(/６/g, "6");
-  text = text.replace(/７/g, "7");
-  text = text.replace(/８/g, "8");
-  text = text.replace(/９/g, "9");
-  text = text.replace(/[^0-9]/g, "");
+  x = x.replace(/０/g, "0");
+  x = x.replace(/１/g, "1");
+  x = x.replace(/２/g, "2");
+  x = x.replace(/３/g, "3");
+  x = x.replace(/４/g, "4");
+  x = x.replace(/５/g, "5");
+  x = x.replace(/６/g, "6");
+  x = x.replace(/７/g, "7");
+  x = x.replace(/８/g, "8");
+  x = x.replace(/９/g, "9");
+  x = x.replace(/[^0-9]/g, "");
   if (x === "") x = "0";
   return x;
 }
