@@ -9,7 +9,7 @@ const div_tab_bar = document.getElementById("div_tab_bar");
 
 div_input_area.addEventListener("click", /**@param {MouseEvent} event */function (event) {
   if (event.target.classList.contains("input_button")) {
-    write_log("flag1 in click event listener. text=" + event.target.innerText); //==========================
+    write_log('flag1 in click event listener. text="E":' + String(event.target.innerText === "E")); //==========================
     input_str(event.target.innerText);
   }
 });
