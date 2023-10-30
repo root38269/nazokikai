@@ -10,7 +10,7 @@ const div_tab_bar = document.getElementById("div_tab_bar");
 div_input_area.addEventListener("click", /**@param {MouseEvent} event */function (event) {
   if (event.target.classList.contains("input_button")) {
     write_log('flag1 in click event listener. typeof text=' + typeof event.target.innerText); //==========================
-    input_str(event.target.innerText);
+    input_str(safe_input_text(event.target.innerText));
   }
 });
 document.addEventListener("keydown", /**@param {KeyboardEvent} event */function (event) {
@@ -489,6 +489,25 @@ function safe_number_text (text) {
   x = x.replace(/９/g, "9");
   x = x.replace(/[^0-9]/g, "");
   if (x === "") x = "0";
+  return x;
+}
+
+function safe_input_text (text) {
+  let x = text;
+  x = x.replace(/０/g, "0");
+  x = x.replace(/１/g, "1");
+  x = x.replace(/２/g, "2");
+  x = x.replace(/３/g, "3");
+  x = x.replace(/４/g, "4");
+  x = x.replace(/５/g, "5");
+  x = x.replace(/６/g, "6");
+  x = x.replace(/７/g, "7");
+  x = x.replace(/８/g, "8");
+  x = x.replace(/９/g, "9");
+  x = x.replace(/Ｃ/g, "C");
+  x = x.replace(/Ｅ/g, "E");
+  x = x.replace(/[^0-9]/g, "");
+  x = x.replace(/[^CE]/g, "");
   return x;
 }
 
