@@ -9,6 +9,7 @@ const div_tab_bar = document.getElementById("div_tab_bar");
 
 div_input_area.addEventListener("click", /**@param {MouseEvent} event */function (event) {
   if (event.target.classList.contains("input_button")) {
+    write_log("flag1 in click event listener"); //==========================
     input_str(event.target.innerText);
   }
 });
@@ -66,8 +67,11 @@ const switch_tab = function (new_tab_number) {
  * @returns {"ERROR"|"LOSE"|"WIN"|"DRAW"} 
  */
 const enter_number = function (num) {
+  write_log("flag1 in enter_number. num=" + num); //==========================
   let my_hand = new PokerHand(get_numbers(num));
+  write_log("flag2 in enter_number"); //==========================
   let question_hand = new PokerHand(get_numbers(current_question_number()));
+  write_log("flag3 in enter_number"); //==========================
   if (my_hand.evaluation === 0) return "ERROR";
   if (my_hand.evaluation < question_hand.evaluation) return "LOSE";
   if (my_hand.evaluation === question_hand.evaluation) return "DRAW";
@@ -83,41 +87,54 @@ let next_reset = false;
 const input_str = function (str) {
   try {
 
-  
+  write_log("flag1 in input_str. str=" + str); //==========================
   if (str === "" || str === null) return;
+  write_log("flag2 in input_str. str=" + str); //==========================
   if (!Number.isNaN(Number(str))) {
+    write_log("flag3 in input_str. str=" + str); //==========================
     if (next_reset) {
+      write_log("flag4 in input_str"); //==========================
       for (let i = 0; i < digits - 1; i++) {
         output_elems[i].innerText = "";
       }
       output_elems[digits - 1].innerText = str;
       next_reset = false;
     }else if (output_elems[0].innerText !== "") {
+      write_log("flag5 in input_str"); //==========================
       return;
     }else{
+      write_log("flag6 in input_str. 十:" + output_elems[digits - 2].innerText + ", 一:" + output_elems[digits - 1].innerText); //==========================
       if (output_elems[digits - 2].innerText === "" && safe_number_text(output_elems[digits - 1].innerText) === "0") {
+        write_log("flag7 in input_str"); //==========================
         output_elems[digits - 1].innerText = str;
       }else{
+        write_log("flag7 in input_str"); //==========================
         for (let i = 0; i < digits - 1; i++) {
-          output_elems[i].innerText = safe_number_text(output_elems[i + 1].innerText);
+          output_elems[i].innerText = output_elems[i + 1].innerText;
         }
         output_elems[digits - 1].innerText = str;
       }
     }
+    write_log("flag8 in input_str"); //==========================
     div_message_area.innerText = "　";
   }else if (str === "C") {
+    write_log("flag9 in input_str"); //==========================
     for (let i = 0; i < digits; i++) {
       output_elems[i].innerText = "";
     }
     next_reset = false;
     div_message_area.innerText = "　";
   }else if (str === "E") {
+    write_log("flag10 in input_str"); //==========================
     if (output_elems[0].innerText === "") return;
+    write_log("flag11 in input_str"); //==========================
     let my_num = "";
     for (let i = 0; i < digits; i++) {
       my_num = my_num + safe_number_text(output_elems[i].innerText);
     }
+    write_log("flag12 in input_str"); //==========================
     let result = enter_number(Number(my_num));
+    write_log("flag13 in input_str"); //==========================
     div_message_area.innerText = result;
     write_log(my_num + ":" + result);
     next_reset = true;
@@ -222,6 +239,7 @@ const factorization = function (number) {
 
 
 const get_numbers = function (number) {
+  write_log("flag1 in get_numbers. number=" + number); //==========================
   return factorization(number).join("").split("").map(elem => Number(elem)).sort();
 }
 
