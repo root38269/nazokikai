@@ -506,8 +506,7 @@ function safe_input_text (text) {
   x = x.replace(/９/g, "9");
   x = x.replace(/Ｃ/g, "C");
   x = x.replace(/Ｅ/g, "E");
-  x = x.replace(/[^0-9]/g, "");
-  x = x.replace(/[^CE]/g, "");
+  x = x.replace(/[^0-9CE]/g, "");
   return x;
 }
 
