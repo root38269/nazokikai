@@ -111,6 +111,7 @@ span.question_number {
   display: none;
 }
 div.message_area {
+  flex-basis: 35px;
   flex-grow: 0;
   flex-shrink: 0;
 
