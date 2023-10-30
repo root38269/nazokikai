@@ -89,7 +89,7 @@ const input_str = function (str) {
 
   write_log("flag1 in input_str. str=" + str); //==========================
   if (str === "" || str === null) return;
-  write_log("flag2 in input_str. isNaN=" + Number.isNaN(Number(str))); //==========================
+  write_log('flag2 in input_str. ="E":' + String(str === "E")); //==========================
   if (!Number.isNaN(Number(str))) {
     write_log("flag3 in input_str. str=" + str); //==========================
     if (next_reset) {
