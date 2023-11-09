@@ -180,12 +180,19 @@ div.log_area,div.memo_area {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  min-height: 0;
+}
+span.area_body {
+  padding: 3px;
+  border: 1px solid;
+  min-height: 0;
+  overflow: scroll;
 }
 .log_body,.memo_body {
   flex-grow: 1;
   display: none;
 
-  font-family: monospace;
+  font-family: sans-serif;
   resize: none;
 }
 
@@ -193,22 +200,139 @@ span.area_caption {
   font-size: 1.2rem;
 }
 
+div.q2 {
+  display: none;
+}
+
 div.tab_wrapper.display1 div.tab_tab.tab1,
 div.tab_wrapper.display2 div.tab_tab.tab2,
-div.tab_wrapper.display3 div.tab_tab.tab3{
+div.tab_wrapper.display3 div.tab_tab.tab3,
+div.tab_wrapper.display4 div.tab_tab.tab4,
+div.tab_wrapper.display5 div.tab_tab.tab5,
+div.tab_wrapper.display6 div.tab_tab.tab6{
   background-color: #fff;
 }
 
 div.tab_wrapper.display1 .area_body.content1,
 div.tab_wrapper.display2 .area_body.content2,
-div.tab_wrapper.display3 .area_body.content3{
+div.tab_wrapper.display3 .area_body.content3,
+div.tab_wrapper.display4 .area_body.content4,
+div.tab_wrapper.display5 .area_body.content5,
+div.tab_wrapper.display6 .area_body.content6{
   display: initial;
 }
 
 div.tab_wrapper.display1 .question_number.content1,
 div.tab_wrapper.display2 .question_number.content2,
-div.tab_wrapper.display3 .question_number.content3{
+div.tab_wrapper.display3 .question_number.content3,
+div.tab_wrapper.display4 .question_number.content4,
+div.tab_wrapper.display5 .question_number.content5,
+div.tab_wrapper.display6 .question_number.content6{
   display: initial;
+}
+
+div.tab_wrapper.display5 .question_area.q2 {
+  display: flex;
+}
+div.tab_wrapper.display5 .message_area.q2 {
+  display: initial;
+}
+
+
+.clear_back {
+  display: none;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  z-index: 10;
+}
+.clear_back.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clear_wrapper {
+  position: relative;
+  height: 400px;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #ddd;
+  border-radius: 20px;
+  
+}
+
+.clear_close_box {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  height: 40px;
+  width: 40px;
+
+  background-color: #ccc;
+  border-radius: 20px;
+}
+.clear_close_box:hover {
+  background-color: #bbb;
+}
+.clear_close_box::before, .clear_close_box::after { /* 共通設定 */
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3px; /* 棒の幅（太さ） */
+  height: 25px; /* 棒の高さ */
+  background: #555;
+}
+.clear_close_box::before {
+  transform: translate(-50%,-50%) rotate(45deg);
+} 
+.clear_close_box::after {
+  transform: translate(-50%,-50%) rotate(-45deg);
+}
+
+.clear_message {
+  text-align: center;
+}
+.level_clear {
+  font-size: 3rem;
+}
+.clear_share {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.share_btn {
+  display: none;
+}
+.share_btn.show {
+  display: block;
+}
+
+.red {
+  color: red;
+}
+.blue {
+  color: blue;
+}
+.black {
+  color: black;
+}
+.green {
+  color: green;
+}
+.strike {
+  text-decoration: line-through;
+  text-decoration-thickness: 0.15em;
 }
 
 
@@ -222,6 +346,7 @@ div.tab_wrapper.display3 .question_number.content3{
   div.side_bar1 {
     order: 2;
     flex-basis: 200px;
+    min-height: 0;
   }
   div.side_bar2 {
     order: 3;
