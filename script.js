@@ -4,8 +4,15 @@
 const div_tab_wrapper = document.getElementById("div_tab_wrapper");
 const div_question_area = document.getElementById("div_question_area");
 const div_message_area = document.getElementById("div_message_area");
+const div_message_area2 = document.getElementById("div_message_area2");
 const div_input_area = document.getElementById("div_input_area");
 const div_tab_bar = document.getElementById("div_tab_bar");
+const div_clear_back = document.getElementById("div_clear_back");
+const div_clear_close_box = document.getElementById("div_clear_close_box");
+const span_level_crear = document.getElementById("span_level_crear");
+const div_share_normal = document.getElementById("div_share_normal");
+const div_share_extra = document.getElementById("div_share_extra");
+
 
 div_input_area.addEventListener("click", /**@param {MouseEvent} event */function (event) {
   if (event.target.classList.contains("input_button")) {
@@ -13,6 +20,7 @@ div_input_area.addEventListener("click", /**@param {MouseEvent} event */function
   }
 });
 document.addEventListener("keydown", /**@param {KeyboardEvent} event */function (event) {
+  if (event.target.tagName === "TEXTAREA") return;
   switch (event.key) {
     case "0": case "1": case "2": case "3": case "4": 
     case "5": case "6": case "7": case "8": case "9":
@@ -24,6 +32,14 @@ document.addEventListener("keydown", /**@param {KeyboardEvent} event */function 
     case "Backspace": case "Delete": case "c":
       document.getElementById("div_btn_C").click();
       break;
+    case "Tab":
+      let my_new_tab = current_tab_number + 1;
+      if (locked[my_new_tab - 1]) {
+        my_new_tab = 1;
+      }
+      input_str("C");
+      switch_tab(my_new_tab);
+      event.preventDefault();
   }
 });
 
@@ -35,6 +51,10 @@ div_tab_bar.addEventListener("click", /**@param {MouseEvent} event */function (e
   }
 })
 
+div_clear_close_box.addEventListener("click", function (event) {
+  div_clear_back.classList.remove("show");
+});
+
 const digits = 4;
 /**@type {[HTMLDivElement]} */
 const output_elems = [];
@@ -42,11 +62,12 @@ for (let i = 0; i < digits; i++) {
   output_elems.push(document.getElementById("div_output_" + (i+1)));
 }
 
-locked = [false, true, true, true];
+locked = [false, true, true, true, true, true, true];
 document.getElementById("div_tab2").style.display = "none";
 document.getElementById("div_tab3").style.display = "none";
-
-
+document.getElementById("div_tab4").style.display = "none";
+document.getElementById("div_tab5").style.display = "none";
+document.getElementById("div_tab6").style.display = "none";
 
 
 
@@ -65,9 +86,9 @@ const switch_tab = function (new_tab_number) {
  * @param {Number} num
  * @returns {"ERROR"|"LOSE"|"WIN"|"DRAW"} 
  */
-const enter_number = function (num) {
+const enter_number = function (num, index) {
   let my_hand = new PokerHand(get_numbers(num));
-  let question_hand = new PokerHand(get_numbers(current_question_number()));
+  let question_hand = new PokerHand(get_numbers(current_question_number(index)));
   if (my_hand.evaluation === 0) return "ERROR";
   if (my_hand.evaluation < question_hand.evaluation) return "LOSE";
   if (my_hand.evaluation === question_hand.evaluation) return "DRAW";
@@ -103,12 +124,14 @@ const input_str = function (str) {
       }
     }
     div_message_area.innerText = "　";
+    div_message_area2.innerText = "　";
   }else if (str === "C") {
     for (let i = 0; i < digits; i++) {
       output_elems[i].innerText = "";
     }
     next_reset = false;
     div_message_area.innerText = "　";
+    div_message_area2.innerText = "　";
   }else if (str === "E") {
     if (output_elems[0].innerText === "") return;
     let my_num = "";
@@ -116,25 +139,111 @@ const input_str = function (str) {
       my_num = my_num + safe_number_text(output_elems[i].innerText);
     }
     let result = enter_number(Number(my_num));
-    div_message_area.innerText = result;
-    write_log(my_num + ":" + result);
-    next_reset = true;
-    if (result === "WIN") {
-      if (locked[current_tab_number]) {
-        if (current_tab_number === 3) {
-          write_log("LEVEL CLEAR!");
+    let result2;
+    let level_clear = false;
+    //div_message_area.innerText = result;
+    if (current_tab_number <= 3) {
+      div_message_area.innerHTML = add_result_tag(result);
+      write_log(add_result_tag(result, false, my_num + ":" + result));
+    }else if (current_tab_number === 4) {
+      div_message_area.innerHTML = add_result_tag(result, true);
+      write_log(add_result_tag(result, true, my_num + ":" + result));
+    }else if (current_tab_number === 5) {
+      result2 = enter_number(Number(my_num), 2);
+      div_message_area.innerHTML = add_result_tag(result);
+      div_message_area2.innerHTML = add_result_tag(result2, true);
+      write_log(my_num + ":" + add_result_tag(result, false, result)  + ", " + add_result_tag(result2, true, result2));
+    }else if (current_tab_number === 6) {
+      if (result === "WIN" || result === "LOSE") {
+        div_message_area.innerHTML = add_result_tag("LOSE", false, result);
+        write_log(add_result_tag("LOSE", false, my_num + ":" + result));
+      }else if (result === "ERROR") {
+        div_message_area.innerHTML = add_result_tag(result);
+        write_log(add_result_tag(result, false, my_num + ":" + result));
+      }else if (result === "DRAW") {
+        if (current_question_number() === Number(my_num)) {
+          div_message_area.innerHTML = add_result_tag("DRAW", false, `<span class="strike red">DRAW</span> SAME`);
+          write_log(add_result_tag("DRAW", false, my_num + ":" + "SAME"));
         }else{
+          div_message_area.innerHTML = add_result_tag("WIN", false, "DRAW");
+          write_log(add_result_tag("WIN", false, my_num + ":" + "DRAW"));
+          level_clear = true;
+        }
+      }
+    }
+    next_reset = true;
+    if (current_tab_number <= 3) {
+      if (result === "WIN") {
+        level_clear = true;
+      }
+    }else if (current_tab_number === 4) {
+      if (result === "LOSE") {
+        level_clear = true;
+      }
+    }else if (current_tab_number === 5) {
+      if (result === "WIN" && result2 === "LOSE") {
+        level_clear = true;
+      }
+    }
+    if (level_clear) {
+      if (locked[current_tab_number]) {
+        
+        if (current_tab_number < 3) {
           document.getElementById("div_tab" + (current_tab_number + 1)).style.display = null;
           write_log("LEVEL." + (current_tab_number + 1) + "が解放されました. ");
+        }else if (current_tab_number === 3) {
+          document.getElementById("div_tab" + (current_tab_number + 1)).style.display = null;
+          write_log("LEVEL.EX" + (current_tab_number - 2) + "が解放されました. ");
+        }else if (current_tab_number < 6) {
+          document.getElementById("div_tab" + (current_tab_number + 1)).style.display = null;
+          write_log("LEVEL.EX" + (current_tab_number - 2) + "が解放されました. ");
+        }else if (current_tab_number === 6) {
+          write_log("EXTRA LEVEL CLEAR!!");
         }
         locked[current_tab_number] = false;
+      }
+      if (current_tab_number === 3) {
+        span_level_crear.innerText = "LEVEL CLEAR!";
+        div_share_extra.classList.remove("show");
+        div_share_normal.classList.add("show");
+        div_clear_back.classList.add("show");
+      }else if (current_tab_number === 6) {
+        span_level_crear.innerText = "EXTRA LEVEL CLEAR!!";
+        div_share_extra.classList.add("show");
+        div_share_normal.classList.remove("show");
+        div_clear_back.classList.add("show")
       }
     }
   }
 
 }
 
-
+const add_result_tag = function (result, reverse = false, str) {
+  if (str === undefined) {
+    if (result === "ERROR") {
+      str = "!!!ERROR!!!";
+    }else{
+      str = result;
+    }
+  }
+  if (result === "ERROR") {
+    return `<span class="black">${str}</span>`;
+  }else if (result === "WIN") {
+    if (reverse) {
+      return `<span class="blue">${str}</span>`;
+    }else{
+      return `<span class="red">${str}</span>`;
+    }
+  }else if (result === "LOSE") {
+    if (reverse) {
+      return `<span class="red">${str}</span>`;
+    }else{
+      return `<span class="blue">${str}</span>`;
+    }
+  }else if (result === "DRAW") {
+    return `<span class="green">${str}</span>`;
+  }
+}
 
 /**
  * ログを出力する
@@ -143,29 +252,37 @@ const input_str = function (str) {
  */
 const write_log = function (str, newline = true) {
   let my_log_body = current_log_body();
-  if (newline) str = str + "\n";
-  my_log_body.value = str + my_log_body.value;
+  if (newline) str = str + "<br>";
+  my_log_body.innerHTML = str + my_log_body.innerHTML;
 }
 
 /**
  * 現在のタブの log_body
- * @returns {HTMLTextAreaElement} 
+ * @returns {HTMLSpanElement} 
  */
 const current_log_body = function () {
   return document.getElementById("textarea_log_body" + current_tab_number);
 }
 
-const current_question_number = function () {
+const current_question_number = function (index) {
+  if (current_tab_number === 5) {
+    if (index === 1) return question_numbers[4][0];
+    if (index === 2) return question_numbers[4][1];
+    return question_numbers[4][0];
+  }
   return question_numbers[current_tab_number - 1];
 }
 
-const question_numbers = [2639, 3835, 7203];
+const question_numbers = [2639, 3835, 7203, 2639, [9995, 9026], 9705];
 
 const init =function () {
   document.getElementById("question_number1").innerText = question_numbers[0];
   document.getElementById("question_number2").innerText = question_numbers[1];
   document.getElementById("question_number3").innerText = question_numbers[2];
-  
+  document.getElementById("question_number4").innerText = question_numbers[3];
+  document.getElementById("question_number5").innerText = question_numbers[4][0];
+  document.getElementById("question_number5_2").innerText = question_numbers[4][1];
+  document.getElementById("question_number6").innerText = question_numbers[5];
 }
 
 
