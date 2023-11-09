@@ -19,15 +19,29 @@
             <div class="tab_tab tab3" id="div_tab3">
               <span class="tab_caption" id="div_cap3">LEVEL.3</span>
             </div>
+            <div class="tab_tab tab4" id="div_tab4">
+              <span class="tab_caption" id="div_cap4">LEVEL.EX1</span>
+            </div>
+            <div class="tab_tab tab5" id="div_tab5">
+              <span class="tab_caption" id="div_cap5">LEVEL.EX2</span>
+            </div>
+            <div class="tab_tab tab6" id="div_tab6">
+              <span class="tab_caption" id="div_cap6">LEVEL.EX3</span>
+            </div>
+            
           </div>
         </div>
         <div class="tab_content">
           <div class="side_bar1">
             <div class="log_area" id="div_log_area">
               <span class="area_caption">履歴</span>
-              <textarea class="area_body log_body content1" readonly id="textarea_log_body1"></textarea>
-              <textarea class="area_body log_body content2" readonly id="textarea_log_body2"></textarea>
-              <textarea class="area_body log_body content3" readonly id="textarea_log_body3"></textarea>
+              <span class="area_body log_body content1" id="textarea_log_body1"></span>
+              <span class="area_body log_body content2" id="textarea_log_body2"></span>
+              <span class="area_body log_body content3" id="textarea_log_body3"></span>
+              <span class="area_body log_body content4" id="textarea_log_body4"></span>
+              <span class="area_body log_body content5" id="textarea_log_body5"></span>
+              <span class="area_body log_body content6" id="textarea_log_body6"></span>
+
               
             </div>  
           </div>
@@ -36,10 +50,20 @@
               <span class="question_number content1" id="question_number1"></span>
               <span class="question_number content2" id="question_number2"></span>
               <span class="question_number content3" id="question_number3"></span>
+              <span class="question_number content4" id="question_number4"></span>
+              <span class="question_number content5" id="question_number5"></span>
+              <span class="question_number content6" id="question_number6"></span>
             </div>
             <div class="message_area" id="div_message_area">
               　
             </div>
+            <div class="question_area q2" id="div_question_area2">
+              <span class="question_number content5" id="question_number5_2"></span>
+            </div>
+            <div class="message_area q2" id="div_message_area2">
+              　
+            </div>
+            
             <div class="output_area">
               <div class="output_cell" id="div_output_1"></div>
               <div class="output_cell" id="div_output_2"></div>
@@ -92,11 +116,36 @@
               <textarea class="area_body memo_body content1"></textarea>
               <textarea class="area_body memo_body content2"></textarea>
               <textarea class="area_body memo_body content3"></textarea>
+              <textarea class="area_body memo_body content4"></textarea>
+              <textarea class="area_body memo_body content5"></textarea>
+              <textarea class="area_body memo_body content6"></textarea>
 
             </div>  
           </div>
         </div>
         
+      </div>
+    </div>
+    <div class="clear_back" id="div_clear_back">
+      <div class="clear_wrapper">
+        <div class="clear_close_box" id="div_clear_close_box">
+        </div>
+        <div class="clear_message">
+          <span class="level_clear" id="span_level_crear">LEVEL CLEAR!</span>
+        </div>
+        <div class="clear_share">
+          <span class="">クリアをツイートしよう！</span>
+          <div class="share_btn show" id="div_share_normal">
+            <!--
+
+              <a href="https://twitter.com/intent/tweet?text=%E3%80%90Clear!%E3%80%91%0A%E3%81%82%E3%81%AA%E3%81%9F%E3%81%AF%E3%80%8C%E8%AC%8E%E3%81%A8%E6%A9%9F%E3%80%8D%E6%9C%80%E5%BC%B7%E3%81%AE%E6%95%B5%E3%82%92%E5%80%92%E3%81%97%E3%80%81%E5%85%A8%E3%81%A6%E3%81%AE%E5%8B%9D%E8%B2%A0%E3%81%AB%22%E5%8B%9D%E5%88%A9%22%E3%81%97%E3%81%9F%EF%BC%81%0A%0A%E6%8C%91%E6%88%A6%E3%81%AF%E3%81%93%E3%81%A1%E3%82%89%E3%81%8B%E3%82%89%E2%86%93%0AURL%0A%0A%23ELink%E8%AC%8E%0A%23ELink%E3%83%8A%E3%82%BE%E3%83%88%E3%82%AD%20" class="twitter-share-button" data-lang="ja"  data-size="large">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            -->
+            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text="【Clear!】 あなたは「謎と機」との勝負に全て勝利した！ 挑戦はこちらから↓" data-url="https://root38269.github.io/nazokikai/" data-via="Nazo_ELink" data-hashtags="ELink謎,ELinkナゾトキ" data-lang="ja" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+          </div>
+          <div class="share_btn" id="div_share_extra">
+            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text="【Extra Clear!!】 あなたは「謎と機」を看破し、完全制覇を成し遂げた！！ 挑戦はこちらから↓" data-url="https://root38269.github.io/nazokikai/" data-via="Nazo_ELink" data-hashtags="ELink謎,ELinkナゾトキ" data-lang="ja" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+          </div>
+        </div>
       </div>
     </div>
     <script type="text/javascript" src="script.js"></script>
