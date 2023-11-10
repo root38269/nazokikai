@@ -1,4 +1,16 @@
 
+/* 
+
+
+
+
+素人のコードなので、あまり見ないであげてください( ;∀;) 
+
+
+
+
+*/
+
 "use strict;"
 
 const div_tab_wrapper = document.getElementById("div_tab_wrapper");
