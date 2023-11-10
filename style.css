@@ -253,6 +253,11 @@ div.tab_wrapper.display5 .message_area.q2 {
   align-items: center;
   justify-content: center;
 }
+.clear_back.initial {
+  left: -300%;
+  top: -300%;
+}
+
 
 .clear_wrapper {
   position: relative;
