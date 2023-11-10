@@ -21,6 +21,7 @@ div_input_area.addEventListener("click", /**@param {MouseEvent} event */function
 });
 document.addEventListener("keydown", /**@param {KeyboardEvent} event */function (event) {
   if (event.target.tagName === "TEXTAREA") return;
+  if (div_clear_back.classList.contains("show")) return;
   switch (event.key) {
     case "0": case "1": case "2": case "3": case "4": 
     case "5": case "6": case "7": case "8": case "9":
