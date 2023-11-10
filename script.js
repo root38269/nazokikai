@@ -220,13 +220,13 @@ const input_str = function (str) {
         div_share_extra.classList.remove("show");
         div_share_normal.classList.add("show");
         div_clear_back.classList.add("show");
-        write_log(`<a href="https://twitter.com/intent/tweet?text=%E3%80%90Clear!%E3%80%91%0A%E3%81%82%E3%81%AA%E3%81%9F%E3%81%AF%E3%80%8C%E8%AC%8E%E3%81%A8%E6%A9%9F%E3%80%8D%E6%9C%80%E5%BC%B7%E3%81%AE%E6%95%B5%E3%82%92%E5%80%92%E3%81%97%E3%80%81%E5%85%A8%E3%81%A6%E3%81%AE%E5%8B%9D%E8%B2%A0%E3%81%AB%22%E5%8B%9D%E5%88%A9%22%E3%81%97%E3%81%9F%EF%BC%81%0A%0A%E6%8C%91%E6%88%A6%E3%81%AF%E3%81%93%E3%81%A1%E3%82%89%E3%81%8B%E3%82%89%E2%86%93%E2%86%93%E2%86%93%0A%0A%23ELink%E8%AC%8E%0A%23ELink%E3%83%8A%E3%82%BE%E3%83%88%E3%82%AD%20%0A%20https%3A%2F%2Froot38269.github.io%2Fnazotoki1%2F">クリアをポストしよう！</a>`);
+        //write_log(`<a href="https://twitter.com/intent/tweet?text=%E3%80%90Clear!%E3%80%91%0A%E3%81%82%E3%81%AA%E3%81%9F%E3%81%AF%E3%80%8C%E8%AC%8E%E3%81%A8%E6%A9%9F%E3%80%8D%E6%9C%80%E5%BC%B7%E3%81%AE%E6%95%B5%E3%82%92%E5%80%92%E3%81%97%E3%80%81%E5%85%A8%E3%81%A6%E3%81%AE%E5%8B%9D%E8%B2%A0%E3%81%AB%22%E5%8B%9D%E5%88%A9%22%E3%81%97%E3%81%9F%EF%BC%81%0A%0A%E6%8C%91%E6%88%A6%E3%81%AF%E3%81%93%E3%81%A1%E3%82%89%E3%81%8B%E3%82%89%E2%86%93%E2%86%93%E2%86%93%0A%0A%23ELink%E8%AC%8E%0A%23ELink%E3%83%8A%E3%82%BE%E3%83%88%E3%82%AD%20%0A%20https%3A%2F%2Froot38269.github.io%2Fnazotoki1%2F">クリアをポストしよう！</a>`);
       }else if (current_tab_number === 6) {
         span_level_crear.innerText = "EXTRA LEVEL CLEAR!!";
         div_share_extra.classList.add("show");
         div_share_normal.classList.remove("show");
         div_clear_back.classList.add("show")
-        write_log(`<a href="https://twitter.com/intent/tweet?text=%E3%80%90Extra%20Clear!!%E3%80%91%0A%E3%81%82%E3%81%AA%E3%81%9F%E3%81%AF%E3%80%8C%E8%AC%8E%E3%81%A8%E6%A9%9F%E3%80%8D%E3%82%92%E7%9C%8B%E7%A0%B4%E3%81%97%E3%80%81%E5%AE%8C%E5%85%A8%E5%88%B6%E8%A6%87%E3%82%92%E6%88%90%E3%81%97%E9%81%82%E3%81%92%E3%81%9F%EF%BC%81%EF%BC%81%0A%0A%E6%8C%91%E6%88%A6%E3%81%AF%E3%81%93%E3%81%A1%E3%82%89%E3%81%8B%E3%82%89%E2%86%93%E2%86%93%E2%86%93%0A%0A%23ELink%E8%AC%8E%0A%23ELink%E3%83%8A%E3%82%BE%E3%83%88%E3%82%AD%0A%20https%3A%2F%2Froot38269.github.io%2Fnazotoki1%2F%20">クリアをポストしよう！</a>`);
+        //write_log(`<a href="https://twitter.com/intent/tweet?text=%E3%80%90Extra%20Clear!!%E3%80%91%0A%E3%81%82%E3%81%AA%E3%81%9F%E3%81%AF%E3%80%8C%E8%AC%8E%E3%81%A8%E6%A9%9F%E3%80%8D%E3%82%92%E7%9C%8B%E7%A0%B4%E3%81%97%E3%80%81%E5%AE%8C%E5%85%A8%E5%88%B6%E8%A6%87%E3%82%92%E6%88%90%E3%81%97%E9%81%82%E3%81%92%E3%81%9F%EF%BC%81%EF%BC%81%0A%0A%E6%8C%91%E6%88%A6%E3%81%AF%E3%81%93%E3%81%A1%E3%82%89%E3%81%8B%E3%82%89%E2%86%93%E2%86%93%E2%86%93%0A%0A%23ELink%E8%AC%8E%0A%23ELink%E3%83%8A%E3%82%BE%E3%83%88%E3%82%AD%0A%20https%3A%2F%2Froot38269.github.io%2Fnazotoki1%2F%20">クリアをポストしよう！</a>`);
       }
     }
   }
