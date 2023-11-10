@@ -284,6 +284,11 @@ const init =function () {
   document.getElementById("question_number5").innerText = question_numbers[4][0];
   document.getElementById("question_number5_2").innerText = question_numbers[4][1];
   document.getElementById("question_number6").innerText = question_numbers[5];
+  setTimeout(() => {
+    div_share_extra.classList.remove("show");
+    div_clear_back.classList.remove("show");
+    div_clear_back.classList.remove("initial");
+  }, 2000);
 }
 
 
